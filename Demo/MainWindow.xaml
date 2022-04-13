@@ -1,0 +1,67 @@
+﻿<Window
+    x:Class="Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ag="clr-namespace:AdaptiveGrid;assembly=AdaptiveGrid"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AdaptiveGrid"
+    Width="350"
+    Height="450"
+    mc:Ignorable="d">
+
+    <ag:AdaptiveGrid>
+
+        <!--  Grid row/column definition  -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <!--  Responsive template area definition  -->
+        <ag:AdaptiveGrid.TemplateAreas>
+
+            <!--  This area is applied to the layout if the width is greater than 0  -->
+            <ag:AdaptiveGridTemplateArea FromWidth="0">
+                <ag:AdaptiveGridTemplateArea.Areas>
+
+                    <ag:AdaptiveGridArea Area="text1" Column="0" />
+                    <ag:AdaptiveGridArea Area="text2" Column="1" />
+
+                </ag:AdaptiveGridTemplateArea.Areas>
+            </ag:AdaptiveGridTemplateArea>
+
+
+            <!--  This area is applied to the layout if the width is greater than 300  -->
+            <ag:AdaptiveGridTemplateArea FromWidth="300">
+                <ag:AdaptiveGridTemplateArea.Areas>
+
+                    <ag:AdaptiveGridArea Area="text1" Column="1" />
+                    <ag:AdaptiveGridArea Area="text2" Column="0" />
+
+                </ag:AdaptiveGridTemplateArea.Areas>
+            </ag:AdaptiveGridTemplateArea>
+
+        </ag:AdaptiveGrid.TemplateAreas>
+
+        <!--  Displayed controls  -->
+        <TextBlock ag:AdaptiveGrid.Area="text1" Background="Red" />
+        <TextBlock ag:AdaptiveGrid.Area="text2" Background="Blue" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Padding="8"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Text="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ag:AdaptiveGrid}, StringFormat=Width: {0}}" />
+
+    </ag:AdaptiveGrid>
+
+</Window>
